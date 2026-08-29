@@ -118,6 +118,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.902, -0.248)
 shape = SubResource("CapsuleShape3D_iar2n")
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=1604673169]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6009479, 5.3167343e-05)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot" unique_id=1534523800]

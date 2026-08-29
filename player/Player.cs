@@ -1,10 +1,38 @@
 using Godot;
 using System;
+using System.ComponentModel;
 
 public partial class Player : CharacterBody3D
 {
 	public const float Speed = 5.0f;
 	public const float JumpVelocity = 4.5f;
+
+	private Node3D cameraPivot;
+
+	[Export(PropertyHint.Range, "0, 0.05")]
+	private float CameraSensitivity_H = 0.02f;
+
+    [Export(PropertyHint.Range, "0, 0.05")]
+	private float CameraSensitivity_V = 0.02f;
+
+	public override void _Ready()
+	{
+		Input.MouseMode = Input.MouseModeEnum.Captured;
+
+		cameraPivot = GetNode<Node3D>("%CameraPivot");
+	}
+
+    public override void _Input(InputEvent @event)
+	{
+		if (Input.IsActionJustPressed("ui_cancel")) Input.MouseMode = Input.MouseModeEnum.Visible;
+		
+		if (@event is InputEventMouseMotion eventMouseMotion)
+		{
+			cameraPivot.RotateY(-eventMouseMotion.Relative.X * CameraSensitivity_H);
+			cameraPivot.RotateX(-eventMouseMotion.Relative.Y * CameraSensitivity_V);
+		}
+    }
+
 
 	public override void _PhysicsProcess(double delta)
 	{
