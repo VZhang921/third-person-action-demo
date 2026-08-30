@@ -12,14 +12,21 @@ public partial class Player : CharacterBody3D
 	[Export(PropertyHint.Range, "0, 0.05")]
 	private float CameraSensitivity_H = 0.02f;
 
-    [Export(PropertyHint.Range, "0, 0.05")]
+	[Export(PropertyHint.Range, "0, 0.05")]
 	private float CameraSensitivity_V = 0.02f;
+
+	private Node3D body;
+	//private Vector3 rotation;
+
+	private Vector3 maxSpringRotation = new Vector3(Mathf.DegToRad(80), 30, 0);
 
 	public override void _Ready()
 	{
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 
 		cameraPivot = GetNode<Node3D>("%CameraPivot");
+		body = GetNode<Node3D>("Body");
+		//rotation = body.Rotation;
 	}
 
     public override void _Input(InputEvent @event)
@@ -29,7 +36,12 @@ public partial class Player : CharacterBody3D
 		if (@event is InputEventMouseMotion eventMouseMotion)
 		{
 			cameraPivot.RotateY(-eventMouseMotion.Relative.X * CameraSensitivity_H);
-			cameraPivot.RotateX(-eventMouseMotion.Relative.Y * CameraSensitivity_V);
+			//this.RotateY(-eventMouseMotion.Relative.X * CameraSensitivity_H);
+			//cameraPivot.RotateX(-eventMouseMotion.Relative.Y * CameraSensitivity_V);
+
+			cameraPivot.RotateObjectLocal(Vector3.Right, -eventMouseMotion.Relative.Y * CameraSensitivity_V);
+
+			cameraPivot.Rotation = cameraPivot.Rotation.Clamp(-maxSpringRotation, maxSpringRotation);
 		}
     }
 
@@ -54,8 +66,14 @@ public partial class Player : CharacterBody3D
 		// As good practice, you should replace UI actions with custom gameplay actions.
 		Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+		direction = direction.Rotated(Vector3.Up, cameraPivot.Rotation.Y);
+		
 		if (direction != Vector3.Zero)
 		{
+			float targetYAngle = Mathf.Atan2(direction.X, direction.Z);
+			GD.Print("targetYAngle: " + Mathf.RadToDeg(targetYAngle));
+			body.Rotation = new Vector3(body.Rotation.X, Mathf.LerpAngle(body.Rotation.Y, targetYAngle, 0.15f), body.Rotation.Z);
+
 			velocity.X = direction.X * Speed;
 			velocity.Z = direction.Z * Speed;
 		}
