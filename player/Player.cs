@@ -20,6 +20,8 @@ public partial class Player : CharacterBody3D
 
 	private Vector3 maxSpringRotation = new Vector3(Mathf.DegToRad(80), 30, 0);
 
+	private AnimationTree animTree;
+
 	public override void _Ready()
 	{
 		Input.MouseMode = Input.MouseModeEnum.Captured;
@@ -27,6 +29,9 @@ public partial class Player : CharacterBody3D
 		cameraPivot = GetNode<Node3D>("%CameraPivot");
 		body = GetNode<Node3D>("Body");
 		//rotation = body.Rotation;
+
+		animTree = GetNode<AnimationTree>("AnimationTree");
+		
 	}
 
     public override void _Input(InputEvent @event)
@@ -84,6 +89,10 @@ public partial class Player : CharacterBody3D
 		}
 
 		Velocity = velocity;
+
+		animTree.Set("parameters/conditions/idle", (IsOnFloor() && inputDir == Vector2.Zero));
+		animTree.Set("parameters/conditions/move", (IsOnFloor() && inputDir != Vector2.Zero));
+
 		MoveAndSlide();
 	}
 }
