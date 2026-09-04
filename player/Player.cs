@@ -4,7 +4,9 @@ using System.ComponentModel;
 
 public partial class Player : CharacterBody3D
 {
-	public const float Speed = 5.0f;
+	public const float Speed = 4.0f;
+	public const float RunMultiplier = 2.0f;
+	public float CurrSpeed = Speed;
 	public const float JumpVelocity = 4.5f;
 
 	private Node3D cameraPivot;
@@ -21,6 +23,9 @@ public partial class Player : CharacterBody3D
 	private Vector3 maxSpringRotation = new Vector3(Mathf.DegToRad(80), 30, 0);
 
 	private AnimationTree animTree;
+
+	private bool Jumping = false;
+	private bool Running = false;
 
 	public override void _Ready()
 	{
@@ -60,11 +65,24 @@ public partial class Player : CharacterBody3D
 		{
 			velocity += GetGravity() * (float)delta;
 		}
+		else Jumping = false;
 
 		// Handle Jump.
 		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
 		{
 			velocity.Y = JumpVelocity;
+			Jumping = true;
+		}
+
+		if (Input.IsActionPressed("run") && IsOnFloor())
+		{
+			CurrSpeed = Speed * RunMultiplier;
+			Running = true;
+		}
+		if (Input.IsActionJustReleased("run") && IsOnFloor())
+		{
+			CurrSpeed = Speed;
+			Running = false;
 		}
 
 		// Get the input direction and handle the movement/deceleration.
@@ -72,26 +90,46 @@ public partial class Player : CharacterBody3D
 		Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
 		direction = direction.Rotated(Vector3.Up, cameraPivot.Rotation.Y);
-		
-		if (direction != Vector3.Zero)
-		{
-			float targetYAngle = Mathf.Atan2(direction.X, direction.Z);
-			GD.Print("targetYAngle: " + Mathf.RadToDeg(targetYAngle));
-			body.Rotation = new Vector3(body.Rotation.X, Mathf.LerpAngle(body.Rotation.Y, targetYAngle, 0.15f), body.Rotation.Z);
 
-			velocity.X = direction.X * Speed;
-			velocity.Z = direction.Z * Speed;
+		if (IsOnFloor())
+		{
+			if (direction != Vector3.Zero)
+			{
+				float targetYAngle = Mathf.Atan2(direction.X, direction.Z);
+				GD.Print("targetYAngle: " + Mathf.RadToDeg(targetYAngle));
+				body.Rotation = new Vector3(body.Rotation.X, Mathf.LerpAngle(body.Rotation.Y, targetYAngle, 0.15f), body.Rotation.Z);
+
+				velocity.X = direction.X * CurrSpeed;
+				velocity.Z = direction.Z * CurrSpeed;
+			}
+			else // direction == Vector3.Zero
+			{
+				velocity.X = Mathf.MoveToward(Velocity.X, 0, CurrSpeed);
+				velocity.Z = Mathf.MoveToward(Velocity.Z, 0, CurrSpeed);
+			}
+		}
+		
+
+		Velocity = velocity;
+		GD.Print("Velocity.Y: " + Velocity.Y);
+
+		animTree.Set("parameters/conditions/idle", (IsOnFloor() && inputDir == Vector2.Zero));
+		animTree.Set("parameters/conditions/move", (IsOnFloor() && inputDir != Vector2.Zero && !Running));
+
+		animTree.Set("parameters/conditions/falling", (!IsOnFloor()));
+		animTree.Set("parameters/conditions/landing", (IsOnFloor()));
+
+		if (Jumping)
+		{
+			animTree.Set("parameters/conditions/falling", (!IsOnFloor() && Velocity.Y > 0));
+			animTree.Set("parameters/conditions/landing", (!IsOnFloor() && Velocity.Y < 0));
 		}
 		else
 		{
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
+			animTree.Set("parameters/conditions/falling", (!IsOnFloor() && Velocity.Y < 0));
 		}
 
-		Velocity = velocity;
-
-		animTree.Set("parameters/conditions/idle", (IsOnFloor() && inputDir == Vector2.Zero));
-		animTree.Set("parameters/conditions/move", (IsOnFloor() && inputDir != Vector2.Zero));
+		animTree.Set("parameters/conditions/running", IsOnFloor() && Running);
 
 		MoveAndSlide();
 	}
