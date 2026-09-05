@@ -1,23 +1,75 @@
 [gd_scene format=3 uid="uid://bkru6ke60f0dd"]
 
 [ext_resource type="Texture2D" uid="uid://b4p0pg7h0etr3" path="res://icon.svg" id="1_6xmxd"]
+[ext_resource type="PackedScene" uid="uid://boaixxcy2q3wc" path="res://world/models/log_stackLarge.glb" id="2_4717r"]
+[ext_resource type="PackedScene" uid="uid://dvk1r7ecuulxw" path="res://player/player.tscn" id="3_h5o24"]
+[ext_resource type="PackedScene" uid="uid://bchc850gtgkae" path="res://world/models/statue_column.glb" id="4_h5o24"]
+[ext_resource type="PackedScene" uid="uid://beeto8684s6rj" path="res://world/models/bridge_stone.glb" id="5_mmdvd"]
+[ext_resource type="PackedScene" uid="uid://bk1tm0iyqn5u6" path="res://world/models/tree_pineDefaultA.glb" id="6_fn3g3"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4717r"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_h5o24"]
+sky_material = SubResource("ProceduralSkyMaterial_4717r")
+
+[sub_resource type="Environment" id="Environment_mmdvd"]
+background_mode = 2
+sky = SubResource("Sky_h5o24")
+glow_enabled = true
+volumetric_fog_length = 30.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iar2n"]
-size = Vector3(10, 1, 10)
+size = Vector3(100, 0.9, 100)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q0h35"]
 albedo_texture = ExtResource("1_6xmxd")
 
 [sub_resource type="BoxMesh" id="BoxMesh_iar2n"]
 material = SubResource("StandardMaterial3D_q0h35")
-size = Vector3(10, 1, 10)
+size = Vector3(100, 0.9, 100)
 
-[node name="StaticBody3D" type="StaticBody3D" unique_id=370199360]
+[sub_resource type="BoxShape3D" id="BoxShape3D_mmdvd"]
+size = Vector3(0.3, 1, 0.3)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=844913217]
+[node name="World" type="Node3D" unique_id=1932225251]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1778926898]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=569848112]
+environment = SubResource("Environment_mmdvd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=370199360]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=844913217]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50909877, 0)
 shape = SubResource("BoxShape3D_iar2n")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=902657958]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=902657958]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50495976, 0)
 mesh = SubResource("BoxMesh_iar2n")
+
+[node name="log_stackLarge2" parent="." unique_id=1509718308 instance=ExtResource("2_4717r")]
+
+[node name="Player" parent="." unique_id=239057101 instance=ExtResource("3_h5o24")]
+
+[node name="statue_column2" parent="." unique_id=1794855178 instance=ExtResource("4_h5o24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.465576, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="statue_column2/statue_column" parent_id_path=PackedInt32Array(1794855178, 232599928) index="0" unique_id=2080264168]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="statue_column2/statue_column/StaticBody3D" unique_id=279743258]
+shape = SubResource("BoxShape3D_mmdvd")
+
+[node name="bridge_stone2" parent="." unique_id=880939174 instance=ExtResource("5_mmdvd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0064697, 0, 0)
+
+[node name="tree_pineDefaultA2" parent="." unique_id=1672713069 instance=ExtResource("6_fn3g3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5466766, 0, 0)
+
+[editable path="log_stackLarge2"]
+[editable path="statue_column2"]

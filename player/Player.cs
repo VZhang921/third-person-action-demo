@@ -79,7 +79,8 @@ public partial class Player : CharacterBody3D
 			CurrSpeed = Speed * RunMultiplier;
 			Running = true;
 		}
-		if (Input.IsActionJustReleased("run") && IsOnFloor())
+		//if (Input.IsActionJustReleased("run") && IsOnFloor())
+		if (!Input.IsActionPressed("run") && IsOnFloor())
 		{
 			CurrSpeed = Speed;
 			Running = false;
