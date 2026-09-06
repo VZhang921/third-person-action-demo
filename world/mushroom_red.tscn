@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cs76kuyjw7aih"]
+
+[ext_resource type="PackedScene" uid="uid://cuxs0nyc53nfo" path="res://world/models/mushroom_red.glb" id="1_f4mep"]
+[ext_resource type="Script" uid="uid://brc4pbk8lp3mb" path="res://world/CollectibleTrigger.cs" id="2_6uhgb"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ceggl"]
+points = PackedVector3Array(0.0009122789, 0.12635298, 0.10547135, 0.087895885, 0.12635298, 0.055251352, 0.02168753, 0.20279999, 0.017025948, 0.00089524686, 0.20279999, 0.02902054, 0.00089524686, 0.12635298, 0.10547135, 0.04697545, 0, 0.046973117, 0.087895885, 0.12635298, -0.04520831, 0.02168753, 0.20279999, -0.0069829077, -0.019880004, 0.20279999, 0.017025948, -0.08607133, 0.12635298, 0.055251352, -0.04699001, 0, 0.046973117, 0.04697545, 0, -0.046997666, 0.0009122789, 0.12635298, -0.09540864, 0.00089524686, 0.20279999, -0.0189775, -0.019880004, 0.20279999, -0.0069829077, -0.08607133, 0.12635298, -0.04520831, -0.04699001, 0, -0.046997666, 0.00089524686, 0.12635298, -0.09540864)
+
+[node name="mushroom_red2" unique_id=2082444979 instance=ExtResource("1_f4mep")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="mushroom_red" parent_id_path=PackedInt32Array(457513591) index="0" unique_id=115405421]
+collision_layer = 2
+script = ExtResource("2_6uhgb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="mushroom_red/StaticBody3D2" index="0" unique_id=187143427]
+shape = SubResource("ConvexPolygonShape3D_ceggl")
