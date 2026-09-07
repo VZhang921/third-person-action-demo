@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dgvs48o8drs42"]
+
+[ext_resource type="Script" uid="uid://brc4pbk8lp3mb" path="res://world/CollectibleTrigger.cs" id="1_l5ww4"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ceggl"]
+points = PackedVector3Array(0.0009122789, 0.12635298, 0.10547135, 0.087895885, 0.12635298, 0.055251352, 0.02168753, 0.20279999, 0.017025948, 0.00089524686, 0.20279999, 0.02902054, 0.00089524686, 0.12635298, 0.10547135, 0.04697545, 0, 0.046973117, 0.087895885, 0.12635298, -0.04520831, 0.02168753, 0.20279999, -0.0069829077, -0.019880004, 0.20279999, 0.017025948, -0.08607133, 0.12635298, 0.055251352, -0.04699001, 0, 0.046973117, 0.04697545, 0, -0.046997666, 0.0009122789, 0.12635298, -0.09540864, 0.00089524686, 0.20279999, -0.0189775, -0.019880004, 0.20279999, -0.0069829077, -0.08607133, 0.12635298, -0.04520831, -0.04699001, 0, -0.046997666, 0.00089524686, 0.12635298, -0.09540864)
+
+[node name="StaticBody3D" type="StaticBody3D" unique_id=1752237117]
+collision_layer = 2
+script = ExtResource("1_l5ww4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=232611375]
+shape = SubResource("ConvexPolygonShape3D_ceggl")

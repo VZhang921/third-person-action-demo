@@ -132,6 +132,24 @@ public partial class Player : CharacterBody3D
 
 		animTree.Set("parameters/conditions/running", IsOnFloor() && Running);
 
+
+		CheckForCollectibleCollision();
+
 		MoveAndSlide();
+	}
+
+	public void CheckForCollectibleCollision()
+	{
+		for (int index = 0; index < GetSlideCollisionCount(); index++)
+		{
+			KinematicCollision3D collision = GetSlideCollision(index);
+
+			if (collision.GetCollider() is CollectibleTrigger collectible)
+			{
+				GD.Print("Collided with collectible");
+				collectible.PickUp();
+			}
+			
+		}
 	}
 }
