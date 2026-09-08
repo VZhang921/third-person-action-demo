@@ -34,30 +34,38 @@ size = Vector3(100, 0.9, 100)
 [sub_resource type="BoxShape3D" id="BoxShape3D_mmdvd"]
 size = Vector3(0.3, 1, 0.3)
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1qkea"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mv06o"]
 emission_shape = 3
-emission_box_extents = Vector3(50, 10, 50)
+emission_box_extents = Vector3(50, 1, 50)
 direction = Vector3(0, -1, 0)
 spread = 5.0
-initial_velocity_min = 5.0
-initial_velocity_max = 5.0
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+color = Color(0.8352941, 0.9019608, 0.9490196, 1)
+collision_mode = 2
 
-[sub_resource type="Curve" id="Curve_iar2n"]
+[sub_resource type="Curve" id="Curve_8yioo"]
 _limits = [0.0, 0.1, 0.0, 1.0]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.068230286, 0.1), 0.0027125424, 0.0027125424, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.9102564, 0.1), 0.0, 0.0, 0, 0, Vector2(0.99999994, 0), 0.0, 0.0, 0, 0]
 point_count = 3
-metadata/_snap_count = 2
 
-[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_q0h35"]
-sections = 3
-section_length = 0.02
-curve = SubResource("Curve_iar2n")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sc4t8"]
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0.8352941, 0.9019608, 0.9490196, 1)
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_1qkea"]
+material = SubResource("StandardMaterial3D_sc4t8")
+sections = 2
+curve = SubResource("Curve_8yioo")
 
 [node name="World" type="Node3D" unique_id=1932225251]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1778926898]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
+shadow_caster_mask = 4294967287
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=569848112]
 environment = SubResource("Environment_mmdvd")
@@ -135,13 +143,19 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3.6086645, 0, 0)
 [node name="mushroom_red8" parent="Trees" unique_id=2134432143 instance=ExtResource("7_sc4t8")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.4151697, 0, 3.1853638)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1963451824]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.602415, 0)
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1062016969]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.656475, 0)
+cast_shadow = 0
 amount = 2000
-visibility_aabb = AABB(-30, -10, -25, 60, 20, 50)
+visibility_aabb = AABB(-50.398476, -155.4784, -50.36033, 100.787796, 156.81093, 100.75423)
 trail_enabled = true
-process_material = SubResource("ParticleProcessMaterial_1qkea")
-draw_pass_1 = SubResource("RibbonTrailMesh_q0h35")
+trail_lifetime = 0.2
+process_material = SubResource("ParticleProcessMaterial_mv06o")
+draw_pass_1 = SubResource("RibbonTrailMesh_1qkea")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="." unique_id=1895171460]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -31.018528, 0)
+size = Vector3(100, 10, 100)
 
 [editable path="log_stackLarge2"]
 [editable path="statue_column2"]
