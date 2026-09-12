@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://dbrpsiownmtn6"]
+
+[ext_resource type="Theme" uid="uid://d33wrawtipi15" path="res://user_interface/ui_theme.tres" id="1_1aipp"]
+[ext_resource type="Script" uid="uid://bhngoqoqba76t" path="res://user_interface/MainMenu.cs" id="2_xqlja"]
+
+[node name="MainMenu" type="CanvasLayer" unique_id=456249673]
+script = ExtResource("2_xqlja")
+
+[node name="Panel" type="Panel" parent="." unique_id=777521164]
+anchors_preset = -1
+anchor_left = 0.049000002
+anchor_right = 0.40800002
+anchor_bottom = 1.0
+offset_right = -0.016021729
+theme = ExtResource("1_1aipp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=375201202]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.13299416
+anchor_top = 0.43364197
+anchor_right = 0.8511626
+anchor_bottom = 0.9722222
+metadata/_edit_use_anchors_ = true
+
+[node name="Play" type="Button" parent="Panel/VBoxContainer" unique_id=1484637631]
+layout_mode = 2
+text = "Play"
+
+[node name="Settings" type="Button" parent="Panel/VBoxContainer" unique_id=252096725]
+layout_mode = 2
+text = "Settings"
+
+[node name="Credits" type="Button" parent="Panel/VBoxContainer" unique_id=362290440]
+layout_mode = 2
+text = "Credits"
+
+[node name="Quit" type="Button" parent="Panel/VBoxContainer" unique_id=17059714]
+layout_mode = 2
+text = "Quit"

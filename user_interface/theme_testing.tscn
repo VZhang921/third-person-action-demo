@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cswib5ostfr0h"]
 
-[ext_resource type="Theme" uid="uid://d33wrawtipi15" path="res://ui_theme.tres" id="1_mdqqm"]
+[ext_resource type="Theme" uid="uid://d33wrawtipi15" path="res://user_interface/ui_theme.tres" id="1_ixarx"]
 
 [node name="Control" type="Control" unique_id=1395186114]
 layout_mode = 3
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_mdqqm")
+theme = ExtResource("1_ixarx")
 
 [node name="Label" type="Label" parent="." unique_id=718829100]
 layout_mode = 0
@@ -23,3 +23,19 @@ offset_top = 17.0
 offset_right = 181.0
 offset_bottom = 76.0
 text = "Play"
+
+[node name="Button2" type="Button" parent="." unique_id=1874429521]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 96.0
+offset_right = 181.0
+offset_bottom = 155.0
+text = "Settings"
+
+[node name="Button3" type="Button" parent="." unique_id=1988468248]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 174.0
+offset_right = 181.0
+offset_bottom = 233.0
+text = "Quit"

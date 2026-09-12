@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://beeto8684s6rj" path="res://world/models/bridge_stone.glb" id="5_mmdvd"]
 [ext_resource type="PackedScene" uid="uid://s3yknklhqm17" path="res://world/tree_pine_default_a_2.tscn" id="6_fn3g3"]
 [ext_resource type="PackedScene" uid="uid://cs76kuyjw7aih" path="res://world/mushroom_red.tscn" id="7_sc4t8"]
+[ext_resource type="PackedScene" uid="uid://dbrpsiownmtn6" path="res://user_interface/main_menu.tscn" id="8_ai45w"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4717r"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -156,6 +157,12 @@ draw_pass_1 = SubResource("RibbonTrailMesh_1qkea")
 [node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="." unique_id=1895171460]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -31.018528, 0)
 size = Vector3(100, 10, 100)
+
+[node name="MainMenu" parent="." unique_id=648493972 instance=ExtResource("8_ai45w")]
+
+[node name="PreviewCamera" type="Camera3D" parent="." unique_id=2078998302]
+transform = Transform3D(0.17880218, -0.33650848, 0.9245495, 0, 0.9396926, 0.34202012, -0.98388505, -0.061153945, 0.16801909, 8.386353, 9.994446, 2.5281372)
+current = true
 
 [editable path="log_stackLarge2"]
 [editable path="statue_column2"]
