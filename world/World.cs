@@ -9,10 +9,23 @@ public partial class World : Node3D
 	public override void _Ready()
 	{
 		if (previewCamera == null) previewCamera = GetNode<Camera3D>("PreviewCamera");
+
+		if (previewCamera.Current)
+		{
+			Input.MouseMode = Input.MouseModeEnum.Visible;
+			Player.Instance.ProcessMode = ProcessModeEnum.Disabled;
+		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+	}
+
+	public void PlayerStart()
+	{
+		Player.Instance.ProcessMode = ProcessModeEnum.Inherit;
+		Input.MouseMode = Input.MouseModeEnum.Captured;
+		previewCamera.Current = false;
 	}
 }

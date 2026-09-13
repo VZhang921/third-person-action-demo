@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://ctfacjfskvidr"]
+
+[ext_resource type="Theme" uid="uid://d33wrawtipi15" path="res://user_interface/ui_theme.tres" id="1_i2sxo"]
+
+[node name="Settings" type="Control" unique_id=167435577]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_i2sxo")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2126926764]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.67058825, 0.83137256, 0.9647059, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Title" type="Label" parent="ColorRect" unique_id=2139664905]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_type_variation = &"TitleLabel"
+text = "Settings"

@@ -3,6 +3,43 @@
 [ext_resource type="Theme" uid="uid://d33wrawtipi15" path="res://user_interface/ui_theme.tres" id="1_1aipp"]
 [ext_resource type="Script" uid="uid://bhngoqoqba76t" path="res://user_interface/MainMenu.cs" id="2_xqlja"]
 
+[sub_resource type="Animation" id="Animation_xqlja"]
+resource_name = "MenuTransition"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(56.448, 0), Vector2(64, 692)]
+}
+
+[sub_resource type="Animation" id="Animation_ejyv4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(56.448, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l8n0t"]
+_data = {
+&"MenuTransition": SubResource("Animation_xqlja"),
+&"RESET": SubResource("Animation_ejyv4")
+}
+
 [node name="MainMenu" type="CanvasLayer" unique_id=456249673]
 script = ExtResource("2_xqlja")
 
@@ -12,6 +49,7 @@ anchor_left = 0.049000002
 anchor_right = 0.40800002
 anchor_bottom = 1.0
 offset_right = -0.016021729
+offset_bottom = -0.0007324219
 theme = ExtResource("1_1aipp")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=375201202]
@@ -38,3 +76,6 @@ text = "Credits"
 [node name="Quit" type="Button" parent="Panel/VBoxContainer" unique_id=17059714]
 layout_mode = 2
 text = "Quit"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1056242551]
+libraries/ = SubResource("AnimationLibrary_l8n0t")

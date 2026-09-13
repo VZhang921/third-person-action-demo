@@ -4,6 +4,7 @@ using System.ComponentModel;
 
 public partial class Player : CharacterBody3D
 {
+	static public Player Instance;
 	public const float Speed = 4.0f;
 	public const float RunMultiplier = 2.0f;
 	public float CurrSpeed = Speed;
@@ -89,8 +90,9 @@ public partial class Player : CharacterBody3D
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
 		Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
-		direction = direction.Rotated(Vector3.Up, cameraPivot.Rotation.Y);
+		//Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+		Vector3 direction = new Vector3(inputDir.X, 0, inputDir.Y).Normalized();
+		direction = direction.Rotated(Vector3.Up, cameraPivot.Rotation.Y);//这里的cameraPivot.Rotation....我感觉是局部坐标系的。我认为应该替换成世界坐标的形式，代码会更健壮。。
 
 		if (IsOnFloor())
 		{
@@ -130,7 +132,7 @@ public partial class Player : CharacterBody3D
 			animTree.Set("parameters/conditions/falling", (!IsOnFloor() && Velocity.Y < 0));
 		}
 
-		animTree.Set("parameters/conditions/running", IsOnFloor() && Running);
+		animTree.Set("parameters/conditions/running", IsOnFloor() && Running && inputDir != Vector2.Zero);
 
 
 		CheckForCollectibleCollision();
@@ -149,7 +151,13 @@ public partial class Player : CharacterBody3D
 				GD.Print("Collided with collectible");
 				collectible.PickUp();
 			}
-			
+
 		}
 	}
+
+    public override void _EnterTree()
+    {
+		Instance = this;
+    }
+
 }
