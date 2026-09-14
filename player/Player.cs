@@ -30,6 +30,7 @@ public partial class Player : CharacterBody3D
 
 	public override void _Ready()
 	{
+		GD.Print("Player._Ready()");
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 
 		cameraPivot = GetNode<Node3D>("%CameraPivot");
@@ -99,7 +100,7 @@ public partial class Player : CharacterBody3D
 			if (direction != Vector3.Zero)
 			{
 				float targetYAngle = Mathf.Atan2(direction.X, direction.Z);
-				GD.Print("targetYAngle: " + Mathf.RadToDeg(targetYAngle));
+				//GD.Print("targetYAngle: " + Mathf.RadToDeg(targetYAngle));
 				body.Rotation = new Vector3(body.Rotation.X, Mathf.LerpAngle(body.Rotation.Y, targetYAngle, 0.15f), body.Rotation.Z);
 
 				velocity.X = direction.X * CurrSpeed;
@@ -114,7 +115,7 @@ public partial class Player : CharacterBody3D
 		
 
 		Velocity = velocity;
-		GD.Print("Velocity.Y: " + Velocity.Y);
+		//GD.Print("Velocity.Y: " + Velocity.Y);
 
 		animTree.Set("parameters/conditions/idle", (IsOnFloor() && inputDir == Vector2.Zero));
 		animTree.Set("parameters/conditions/move", (IsOnFloor() && inputDir != Vector2.Zero && !Running));

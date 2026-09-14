@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="third-person-action-demo"
-run/main_scene="res://world/main.tscn"
+run/main_scene="uid://bkru6ke60f0dd"
 config/features=PackedStringArray("4.7", "C#", "Mobile")
 config/icon="res://icon.svg"
 

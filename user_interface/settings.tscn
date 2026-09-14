@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://ctfacjfskvidr"]
 
 [ext_resource type="Theme" uid="uid://d33wrawtipi15" path="res://user_interface/ui_theme.tres" id="1_i2sxo"]
+[ext_resource type="Texture2D" uid="uid://c154jcdhvspcf" path="res://user_interface/red_boxCross.png" id="2_biva2"]
+[ext_resource type="Script" uid="uid://b4udpyu0qfrfj" path="res://user_interface/Settings.cs" id="2_j3di0"]
 
 [node name="Settings" type="Control" unique_id=167435577]
 layout_mode = 3
@@ -10,18 +12,71 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_i2sxo")
+script = ExtResource("2_j3di0")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=2126926764]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.67058825, 0.83137256, 0.9647059, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Title" type="Label" parent="ColorRect" unique_id=2139664905]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 362.0
+offset_top = 55.0
+offset_right = 746.0
+offset_bottom = 158.0
 theme_type_variation = &"TitleLabel"
 text = "Settings"
+
+[node name="MusicLabel" type="Label" parent="ColorRect" unique_id=124803151]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.090277776
+anchor_top = 0.3919753
+anchor_right = 0.4236111
+anchor_bottom = 0.5509259
+theme_type_variation = &"TitleLabel"
+text = "Settings"
+
+[node name="MusicSlider" type="HSlider" parent="ColorRect" unique_id=367058402]
+layout_mode = 0
+offset_left = 454.0
+offset_top = 257.0
+offset_right = 936.0
+offset_bottom = 370.0
+
+[node name="SFXLabel" type="Label" parent="ColorRect" unique_id=1398025035]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.090277776
+anchor_top = 0.3919753
+anchor_right = 0.4236111
+anchor_bottom = 0.5509259
+offset_top = 146.0
+offset_bottom = 146.0
+theme_type_variation = &"TitleLabel"
+text = "Settings"
+
+[node name="SFXSlider" type="HSlider" parent="ColorRect" unique_id=1584844463]
+layout_mode = 0
+offset_left = 454.0
+offset_top = 400.0
+offset_right = 936.0
+offset_bottom = 513.0
+
+[node name="CloseButton" type="Button" parent="ColorRect" unique_id=1008157912]
+layout_mode = 0
+offset_left = 996.0
+offset_top = 55.0
+offset_right = 1066.0
+offset_bottom = 132.0
+theme_override_font_sizes/font_size = 50
+icon = ExtResource("2_biva2")
+flat = true
+icon_alignment = 1
+expand_icon = true

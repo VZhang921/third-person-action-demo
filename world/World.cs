@@ -12,6 +12,7 @@ public partial class World : Node3D
 
 		if (previewCamera.Current)
 		{
+			GD.Print("World._Ready()");
 			Input.MouseMode = Input.MouseModeEnum.Visible;
 			Player.Instance.ProcessMode = ProcessModeEnum.Disabled;
 		}

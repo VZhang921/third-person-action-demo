@@ -1,25 +1,49 @@
 [gd_resource type="Theme" format=3 uid="uid://d33wrawtipi15"]
 
+[ext_resource type="Texture2D" uid="uid://0hhn8g34uirb" path="res://user_interface/red_circle.png" id="1_1hv1k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_biva2"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iar2n"]
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
 border_color = Color(0.08627451, 0.21176471, 0.3764706, 1)
-border_blend = true
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
-expand_margin_left = 3.0
-expand_margin_right = 3.0
 shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4nw62"]
+bg_color = Color(0, 0.24313726, 0.39607844, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q0h35"]
+bg_color = Color(0.79607844, 0.54509807, 0.34901962, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_i4nap"]
+color = Color(0, 0.24313726, 0.39607844, 1)
+grow_begin = -4.0
+grow_end = -10.0
+thickness = 12
 
 [resource]
 Button/colors/font_color = Color(0.11764706, 0.20784314, 0.43137255, 1)
 Button/font_sizes/font_size = 25
+Button/styles/hover = SubResource("StyleBoxFlat_biva2")
 Button/styles/normal = SubResource("StyleBoxFlat_iar2n")
 DangerButton/base_type = &"CheckBox"
+HSlider/icons/grabber = ExtResource("1_1hv1k")
+HSlider/icons/grabber_disabled = ExtResource("1_1hv1k")
+HSlider/icons/grabber_highlight = ExtResource("1_1hv1k")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_4nw62")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_q0h35")
+HSlider/styles/slider = SubResource("StyleBoxLine_i4nap")
 TitleLabel/base_type = &"Label"
 TitleLabel/colors/font_color = Color(0, 0, 0, 1)
 TitleLabel/font_sizes/font_size = 75

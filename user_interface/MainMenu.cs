@@ -56,5 +56,8 @@ public partial class MainMenu : CanvasLayer
 	}
 
 	public void OnSettingsClicked()
-	{ }
+	{
+		Node settingsScene = ResourceLoader.Load<PackedScene>("res://user_interface/settings.tscn").Instantiate();
+		AddChild(settingsScene);
+	}
 }
