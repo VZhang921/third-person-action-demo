@@ -9,6 +9,9 @@ public partial class MainMenu : CanvasLayer
 	[Export]
 	private AnimationPlayer animPlayer;
 
+	[Export]
+	private AudioStreamPlayer audioPlayer;
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -16,6 +19,7 @@ public partial class MainMenu : CanvasLayer
 		if (quitButton == null) quitButton = GetNode<Button>("Panel/VBoxContainer/Quit");
 		if (playButton == null) playButton = GetNode<Button>("Panel/VBoxContainer/Play");
 		if (settingsButton == null) settingsButton = GetNode<Button>("Panel/VBoxContainer/Settings");
+		if (audioPlayer == null) audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 
 		quitButton.Pressed += this.ExitGame;
 
@@ -42,6 +46,8 @@ public partial class MainMenu : CanvasLayer
 		animPlayer.Play("MenuTransition");
 		World root = GetOwner<World>();
 		root.PlayerStart();
+
+		audioPlayer.Play();
 		
 
 		/*

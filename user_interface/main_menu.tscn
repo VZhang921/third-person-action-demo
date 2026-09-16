@@ -2,6 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://d33wrawtipi15" path="res://user_interface/ui_theme.tres" id="1_1aipp"]
 [ext_resource type="Script" uid="uid://bhngoqoqba76t" path="res://user_interface/MainMenu.cs" id="2_xqlja"]
+[ext_resource type="AudioStream" uid="uid://b0norkey2b1oy" path="res://user_interface/MainMenuTransition.wav" id="3_ejyv4"]
 
 [sub_resource type="Animation" id="Animation_xqlja"]
 resource_name = "MenuTransition"
@@ -79,3 +80,7 @@ text = "Quit"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1056242551]
 libraries/ = SubResource("AnimationLibrary_l8n0t")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=739566218]
+stream = ExtResource("3_ejyv4")
+bus = &"SFX"
