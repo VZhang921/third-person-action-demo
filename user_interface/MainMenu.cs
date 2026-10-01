@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class MainMenu : CanvasLayer
 {
@@ -45,9 +46,10 @@ public partial class MainMenu : CanvasLayer
 	{
 		animPlayer.Play("MenuTransition");
 		World root = GetOwner<World>();
-		root.PlayerStart();
+		root?.PlayerStart();
 
 		audioPlayer.Play();
+		HideMenu();
 		
 
 		/*
@@ -65,5 +67,13 @@ public partial class MainMenu : CanvasLayer
 	{
 		Node settingsScene = ResourceLoader.Load<PackedScene>("res://user_interface/settings.tscn").Instantiate();
 		AddChild(settingsScene);
+	}
+
+	public async void HideMenu()
+	{
+		await ToSignal(animPlayer, AnimationPlayer.SignalName.AnimationFinished);
+		this.Visible = false;
+		World root = GetOwner<World>();
+		root.TriggerWorldMusic();
 	}
 }

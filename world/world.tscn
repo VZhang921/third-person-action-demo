@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://s3yknklhqm17" path="res://world/tree_pine_default_a_2.tscn" id="6_fn3g3"]
 [ext_resource type="PackedScene" uid="uid://cs76kuyjw7aih" path="res://world/mushroom_red.tscn" id="7_sc4t8"]
 [ext_resource type="PackedScene" uid="uid://dbrpsiownmtn6" path="res://user_interface/main_menu.tscn" id="8_ai45w"]
+[ext_resource type="AudioStream" uid="uid://dbuypel1mgt8t" path="res://world/Midnight Tale.mp3" id="10_fyhu2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4717r"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -62,8 +63,9 @@ material = SubResource("StandardMaterial3D_sc4t8")
 sections = 2
 curve = SubResource("Curve_8yioo")
 
-[node name="World" type="Node3D" unique_id=1932225251]
+[node name="World" type="Node3D" unique_id=1932225251 node_paths=PackedStringArray("worldMusic")]
 script = ExtResource("1_4papg")
+worldMusic = NodePath("WorldMusic")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1778926898]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
@@ -165,6 +167,11 @@ size = Vector3(100, 10, 100)
 [node name="PreviewCamera" type="Camera3D" parent="." unique_id=2078998302]
 transform = Transform3D(0.17880218, -0.33650848, 0.9245495, 0, 0.9396926, 0.34202012, -0.98388505, -0.061153945, 0.16801909, 8.386353, 9.994446, 2.5281372)
 current = true
+
+[node name="WorldMusic" type="AudioStreamPlayer" parent="." unique_id=637692617]
+stream = ExtResource("10_fyhu2")
+volume_db = -15.0
+bus = &"Music"
 
 [editable path="log_stackLarge2"]
 [editable path="statue_column2"]
